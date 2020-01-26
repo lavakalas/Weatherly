@@ -2,19 +2,18 @@ import 'dart:convert';
 
 import 'package:weatherly/weather.dart';
 import 'package:http/http.dart' as http;
-import 'package:weatherly/weather_data.dart';
 
 // 1539a383d823965800c50ec8b158a02f
 
 class WeatherRepository {
-  WeatherData loadedWeatherForecast;
+  Weather loadedWeatherForCurrentTown;
 
-  Future<void> getWeatherViaLonAndLat(num lat, num lon) async {
+  Future<void> getWeatherForCurrentTown(String city) async {
     await http.get(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&units=metric',
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&units=metric',
         headers: {'x-api-key': '1539a383d823965800c50ec8b158a02f'}).then((v) {
       if (v.statusCode >= 200 && v.statusCode < 300) {
-        loadedWeatherForecast = Weather.fromJson(v.body);
+        loadedWeatherForCurrentTown = Weather.fromJson(v.body);
       } else {
         print('error');
         return null;
@@ -26,7 +25,7 @@ class WeatherRepository {
     });
   }
 
-  Future<void> getWeatherViaCountryName(String name) async {
+  Future<void> getWeatherForChoosenTown(String name) async {
     await http
         .get(
             'http://api.openweathermap.org/data/2.5/forecast?q=$name&units=metric&appid=1539a383d823965800c50ec8b158a02f')
@@ -35,13 +34,13 @@ class WeatherRepository {
         final data = jsonDecode(v.body);
         num code = int.parse(data['cod']);
         if (code == 200) {
-          loadedWeatherForecast = Weather.fromJson(v.body);
+          loadedWeatherForCurrentTown = Weather.fromJson(v.body);
         } else {
-          loadedWeatherForecast = null;
+          loadedWeatherForCurrentTown = null;
           return null;
         }
       } else {
-        loadedWeatherForecast = null;
+        loadedWeatherForCurrentTown = null;
       }
     }).catchError((error) {
       print(error);

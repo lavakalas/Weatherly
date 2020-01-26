@@ -23,8 +23,8 @@ class _MyAppState extends State<MyApp> {
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     num lon = position.longitude;
     num lat = position.latitude;
-    await weatherRepository.getWeatherViaLonAndLat(lat, lon).then((value) {
-      print(weatherRepository.loadedWeatherForecast);
+    await weatherRepository.getWeatherForCurrentTown('wow').then((value) {
+      print(weatherRepository.loadedWeatherForCurrentTown);
       setState(() {
         isLoading = false;
       });
@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? LoadingPage()
           : HomePage(
-              weather: weatherRepository.loadedWeatherForecast.currentWeather,
+              weather: weatherRepository.loadedWeatherForCurrentTown,
             ),
       routes: {
         '/home': ((BuildContext context) => HomePage()),

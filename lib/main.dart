@@ -5,7 +5,6 @@ import 'package:weatherly/pages/geo_page.dart';
 
 import 'package:weatherly/pages/home_page.dart';
 import 'package:weatherly/pages/loading_page.dart';
-import 'package:weatherly/weather.dart';
 import 'package:weatherly/weather_repository.dart';
 
 void main() => runApp(MyApp());
@@ -17,15 +16,14 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoading = true;
-  Weather weather = Weather();
-  weatherRepository WR = weatherRepository();
+  WeatherRepository weatherRepository = WeatherRepository();
 
   void loading() async {
     Position position = await Geolocator().getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     num lon = position.longitude;
     num lat = position.latitude;
-    await WR.getWeather(lat, lon);
+    await weatherRepository.getWeather(lat, lon);
 
     setState(() {
       isLoading = false;
@@ -41,15 +39,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,]);
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       title: "Weathery",
       color: Colors.blueAccent,
       home: isLoading
           ? LoadingPage()
           : HomePage(
-              weather: WR.decodedData,
+              weather: weatherRepository.decodedData,
             ),
       routes: {
         '/home': ((BuildContext context) => HomePage()),

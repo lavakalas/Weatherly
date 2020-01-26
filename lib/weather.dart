@@ -26,10 +26,29 @@ class Weather {
 
     print(data);
 
-    WeatherData weatherData = WeatherData();
+    if (int.parse(data['code']) >= 200 &&
+        int.parse(data['code']) < 300) if (data.containsKey('list')) {
+      final currentWeather = data['list'][0];
 
-    if (weatherData.statusCode >= 200 && weatherData.statusCode < 300) if (data
-        .containsKey('list')) {
+      WeatherData weatherData = WeatherData(
+        currentWeather: Weather(
+          humidity: currentWeather['main']['humidity'],
+          windSpeed: currentWeather['wind']['speed'],
+          pressure: currentWeather['main']['pressure'],
+          temperature: currentWeather['main']['temp'],
+          description: currentWeather['weather'][0]['description'],
+          main: currentWeather['weather'][0]['description'],
+          feels: currentWeather['main']['feels_like'],
+          id: currentWeather['weather'][0]['id'],
+          maxTemp: currentWeather['main']['temp_max'],
+          minTemp: currentWeather['main']['temp_min'],
+          country: data['country'],
+          city: data['city']['name'],
+        ),
+        country: data['country'],
+        city: data['city']['name'],
+      );
+
       final List<Weather> currentForecast = [];
 
       for (int i = 0; i < data['list'].length; i++) {
@@ -49,15 +68,17 @@ class Weather {
           country: data['country'],
           city: data['city']['name'],
         ));
+
+        weatherData.setForecast(currentForecast);
+
+        return weatherData;
       }
     } else {
-      print(weatherData.currentWeather);
+      WeatherData weatherData = WeatherData();
 
-      print(weatherData.forecast);
-
-      weatherData.forecast = [];
+      return weatherData;
     }
-
-    return weatherData;
+    else
+      return null;
   }
 }

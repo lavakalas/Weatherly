@@ -1,21 +1,14 @@
 import 'dart:convert';
 
+import 'package:weatherly/weather_data.dart';
+
 class Weather {
-  String town;
-  String main;
-  String description;
-  num temperature;
-  num windSpeed;
-  String country;
+  String city, main, description, country;
+  num temperature, maxTemp, minTemp, feels, windSpeed, humidity, pressure;
   int id;
-  num maxTemp;
-  num minTemp;
-  num humidity;
-  num pressure;
-  num feels;
 
   Weather(
-      {this.town,
+      {this.city,
       this.description,
       this.main,
       this.temperature,
@@ -28,21 +21,43 @@ class Weather {
       this.pressure,
       this.feels});
 
-  static Weather fromJson(String json) {
+  static WeatherData fromJson(String json) {
     final Map<String, dynamic> data = jsonDecode(json);
-    return Weather(
-        town: data['name'],
-        description:
-            '${data['weather'][0]['description'][0].toUpperCase()}${data['weather'][0]['description'].substring(1)}',
-        main: data['weather'][0]['main'],
-        temperature: data['main']['temp'],
-        windSpeed: data['wind']['speed'],
-        country: data['sys']['country'],
-        maxTemp: data['main']['temp_max'],
-        minTemp: data['main']['temp_min'],
-        humidity: data['main']['humidity'],
-        pressure: data['main']['pressure'],
-        id: data['weather'][0]['id'],
-        feels: data['main']['feels_like']);
+
+    print(data);
+
+    WeatherData weatherData = WeatherData();
+
+    if (weatherData.statusCode >= 200 && weatherData.statusCode < 300) if (data
+        .containsKey('list')) {
+      final List<Weather> currentForecast = [];
+
+      for (int i = 0; i < data['list'].length; i++) {
+        final currentWeather = data['list'][i];
+
+        currentForecast.add(Weather(
+          humidity: currentWeather['main']['humidity'],
+          windSpeed: currentWeather['wind']['speed'],
+          pressure: currentWeather['main']['pressure'],
+          temperature: currentWeather['main']['temp'],
+          description: currentWeather['weather'][0]['description'],
+          main: currentWeather['weather'][0]['description'],
+          feels: currentWeather['main']['feels_like'],
+          id: currentWeather['weather'][0]['id'],
+          maxTemp: currentWeather['main']['temp_max'],
+          minTemp: currentWeather['main']['temp_min'],
+          country: data['country'],
+          city: data['city']['name'],
+        ));
+      }
+    } else {
+      print(weatherData.currentWeather);
+
+      print(weatherData.forecast);
+
+      weatherData.forecast = [];
+    }
+
+    return weatherData;
   }
 }

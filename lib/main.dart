@@ -5,7 +5,7 @@ import 'package:weatherly/pages/geo_page.dart';
 
 import 'package:weatherly/pages/home_page.dart';
 import 'package:weatherly/pages/loading_page.dart';
-import 'package:weatherly/weather_repository.dart';
+import 'package:weatherly/weather_data_getter.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,10 +23,11 @@ class _MyAppState extends State<MyApp> {
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     num lon = position.longitude;
     num lat = position.latitude;
-    await weatherRepository.getWeather(lat, lon);
-
-    setState(() {
-      isLoading = false;
+    await weatherRepository.getWeatherViaLonAndLat(lat, lon).then((value) {
+      print(weatherRepository.loadedWeatherForecast);
+      setState(() {
+        isLoading = false;
+      });
     });
   }
 
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       home: isLoading
           ? LoadingPage()
           : HomePage(
-              weather: weatherRepository.decodedData,
+              weather: weatherRepository.loadedWeatherForecast.currentWeather,
             ),
       routes: {
         '/home': ((BuildContext context) => HomePage()),

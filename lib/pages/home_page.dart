@@ -109,22 +109,21 @@ class _HomePageState extends State<HomePage> {
           snap: true,
           expandedHeight: 300.0,
           title: Padding(
-            padding: const EdgeInsets.only(top:20.0),
+            padding: const EdgeInsets.only(top: 20.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left:110.0),
+                  padding: const EdgeInsets.only(left: 110.0),
                   child: Row(
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(),
                         child: Row(
                           children: <Widget>[
-                            Icon(FontAwesomeIcons.city,
-                                color: Colors.white),
+                            Icon(FontAwesomeIcons.city, color: Colors.white),
                             Text(
-                              '  ${widget.weather.town}, ${widget.weather.country}',
+                              '  ${widget.weather.city}, ${widget.weather.country}',
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
@@ -152,14 +151,15 @@ class _HomePageState extends State<HomePage> {
                         Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 8.0),
-                              child:
-                                  Icon(widget.wicon, size: 70.0, color: Colors.white),
+                              padding:
+                                  const EdgeInsets.only(left: 20.0, top: 8.0),
+                              child: Icon(widget.wicon,
+                                  size: 70.0, color: Colors.white),
                             )),
                         Align(
                           alignment: Alignment.topRight,
                           child: Padding(
-                            padding: const EdgeInsets.only(top:50.0),
+                            padding: const EdgeInsets.only(top: 50.0),
                             child: PopupMenuButton<String>(
                               icon: Icon(
                                 Icons.more_vert,
@@ -211,7 +211,8 @@ class _HomePageState extends State<HomePage> {
                                       size: 20.0, color: Colors.white),
                                   Text(
                                     ' : ${widget.weather.description}',
-                                    style: TextStyle(color: Colors.white,fontSize: 20.0),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20.0),
                                   )
                                 ],
                               ),
@@ -221,7 +222,8 @@ class _HomePageState extends State<HomePage> {
                                       size: 20.0, color: Colors.white),
                                   Text(
                                     ': ${widget.weather.windSpeed} m/s',
-                                    style: TextStyle(color: Colors.white,fontSize: 20.0),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20.0),
                                   ),
                                 ],
                               ),
@@ -246,7 +248,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'RealFeel°: ${(widget.weather.feels - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
+                        'RealFeel°: ${(widget.weather.feels - 273.15).toInt()}°C',
+                        style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
@@ -261,7 +264,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
+                        'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C',
+                        style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
@@ -276,7 +280,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
+                        'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C',
+                        style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
@@ -289,7 +294,9 @@ class _HomePageState extends State<HomePage> {
                   FontAwesomeIcons.tint,
                   color: Colors.indigo,
                 ),
-                Center(child: Text('Humidity: ${widget.weather.humidity}%', style: TextStyle(fontSize: 20.0))),
+                Center(
+                    child: Text('Humidity: ${widget.weather.humidity}%',
+                        style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
@@ -307,7 +314,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}${(widget.weather.pressure * 0.0075).toString()[2]}${(widget.weather.pressure * 0.0075).toString()[3]}mmHg', style: TextStyle(fontSize: 20.0),)),
+                  'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}${(widget.weather.pressure * 0.0075).toString()[2]}${(widget.weather.pressure * 0.0075).toString()[3]}mmHg',
+                  style: TextStyle(fontSize: 20.0),
+                )),
               ],
             ),
           )
@@ -320,27 +329,33 @@ class _HomePageState extends State<HomePage> {
     switch (choice) {
       case 'Информация':
         showDialog(
-          context: context,
-          // ignore: missing_return
-          builder: (BuildContext context){
-            return AlertDialog(
-              title: Text('Weathery v1.0.0'),
-              content: Container( height: 280.0,
-                child: Column(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom:41.0),
-                    child: Image.asset('assets/info.png',width: 150, height: 150,),
+            context: context,
+            // ignore: missing_return
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Weathery v1.0.0'),
+                content: Container(
+                  height: 280.0,
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 41.0),
+                        child: Image.asset(
+                          'assets/info.png',
+                          width: 150,
+                          height: 150,
+                        ),
+                      ),
+                      Text('Developed by: Lavakalas(Ilya)\n'
+                          'Contact information: lavakalas@mail.ru')
+                    ],
                   ),
-                  Text('Developed by: Lavakalas(Ilya)\n'
-                      'Contact information: lavakalas@mail.ru')
-                ],),
-              ),
-            );
-          }
-        );
+                ),
+              );
+            });
         break;
 
-      case'Выход':
+      case 'Выход':
         SystemNavigator.pop();
         break;
     }

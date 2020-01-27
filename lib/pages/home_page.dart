@@ -105,236 +105,245 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: PageView(
-          controller: widget._controller,
-          children: <Widget>[
-            Container(color: Colors.white,),
-            CustomScrollView(slivers: <Widget>[
-            SliverAppBar(
-                pinned: false,
-                snap: true,
-                expandedHeight: 300.0,
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 110.0),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(),
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(FontAwesomeIcons.city, color: Colors.white),
-                                  Text(
-                                    '  ${widget.weather.city}, ${widget.weather.country}',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                floating: true,
-                stretch: true,
-                backgroundColor: Colors.blueAccent,
-                flexibleSpace: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
-                    child: Container(
-                      width: double.infinity,
-                      child: Column(
+      controller: widget._controller,
+      children: <Widget>[
+        Container(
+          color: Colors.white,
+        ),
+        CustomScrollView(slivers: <Widget>[
+          SliverAppBar(
+              pinned: false,
+              snap: true,
+              expandedHeight: 300.0,
+              title: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 110.0),
+                      child: Row(
                         children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 20.0, top: 8.0),
-                                    child: Icon(widget.wicon,
-                                        size: 70.0, color: Colors.white),
-                                  )),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 50.0),
-                                  child: PopupMenuButton<String>(
-                                    icon: Icon(
-                                      Icons.more_vert,
-                                      color: Colors.white,
-                                    ),
-                                    onSelected: choiceAction,
-                                    itemBuilder: (BuildContext context) {
-                                      return Constants.more.map((String choice) {
-                                        return PopupMenuItem<String>(
-                                          value: choice,
-                                          child: Text(choice),
-                                        );
-                                      }).toList();
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 35.0, right: 90.0),
+                            padding: const EdgeInsets.only(),
                             child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.only(left: 10.0, right: 20.0),
-                                  child: Text(
-                                    '${(widget.weather.temperature - 273.15).toInt()}°C',
-                                    style: TextStyle(
-                                        fontSize: 100.0,
-                                        fontFamily: 'Horta',
-                                        color: Colors.white),
-                                  ),
+                                Icon(FontAwesomeIcons.city,
+                                    color: Colors.white),
+                                Text(
+                                  '  ${widget.weather.city}, ${widget.weather.country}',
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 100.0),
-                            child: Container(
-                                height: 63.0,
-                                child: Column(
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(FontAwesomeIcons.cloud,
-                                            size: 20.0, color: Colors.white),
-                                        Text(
-                                          ' : ${widget.weather.description}',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 20.0),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(FontAwesomeIcons.wind,
-                                            size: 20.0, color: Colors.white),
-                                        Text(
-                                          ': ${widget.weather.windSpeed} m/s',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 20.0),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )),
-                          )
                         ],
                       ),
                     ),
-                  ),
-                )),
-            SliverList(
-              delegate: SliverChildListDelegate([
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.thermometerEmpty,
-                        color: Colors.grey,
-                      ),
-                      Center(
-                          child: Text(
-                              'RealFeel°: ${(widget.weather.feels - 273.15).toInt()}°C',
-                              style: TextStyle(fontSize: 20.0))),
-                    ],
+                  ],
+                ),
+              ),
+              floating: true,
+              stretch: true,
+              backgroundColor: Colors.blueAccent,
+              flexibleSpace: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20.0, top: 8.0),
+                                  child: Icon(widget.wicon,
+                                      size: 70.0, color: Colors.white),
+                                )),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 50.0),
+                                child: PopupMenuButton<String>(
+                                  icon: Icon(
+                                    Icons.more_vert,
+                                    color: Colors.white,
+                                  ),
+                                  onSelected: choiceAction,
+                                  itemBuilder: (BuildContext context) {
+                                    return Constants.more.map((String choice) {
+                                      return PopupMenuItem<String>(
+                                        value: choice,
+                                        child: Text(choice),
+                                      );
+                                    }).toList();
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(top: 35.0, right: 90.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, right: 20.0),
+                                child: Text(
+                                  '${(widget.weather.temperature - 273.15).toInt()}°C',
+                                  style: TextStyle(
+                                      fontSize: 100.0,
+                                      fontFamily: 'Horta',
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 100.0),
+                          child: Container(
+                              height: 63.0,
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Icon(FontAwesomeIcons.cloud,
+                                          size: 20.0, color: Colors.white),
+                                      Text(
+                                        ' : ${widget.weather.description}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Icon(FontAwesomeIcons.wind,
+                                          size: 20.0, color: Colors.white),
+                                      Text(
+                                        ': ${widget.weather.windSpeed} m/s',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.snowflake,
-                        color: Colors.cyanAccent,
-                      ),
-                      Center(
-                          child: Text(
-                              'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C',
-                              style: TextStyle(fontSize: 20.0))),
-                    ],
-                  ),
+              )),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.thermometerEmpty,
+                      color: Colors.grey,
+                    ),
+                    Center(
+                        child: Text(
+                            'RealFeel°: ${(widget.weather.feels - 273.15).toInt()}°C',
+                            style: TextStyle(fontSize: 20.0))),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.fire,
-                        color: Colors.deepOrange,
-                      ),
-                      Center(
-                          child: Text(
-                              'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C',
-                              style: TextStyle(fontSize: 20.0))),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.snowflake,
+                      color: Colors.cyanAccent,
+                    ),
+                    Center(
+                        child: Text(
+                            'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C',
+                            style: TextStyle(fontSize: 20.0))),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        FontAwesomeIcons.tint,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.fire,
+                      color: Colors.deepOrange,
+                    ),
+                    Center(
+                        child: Text(
+                            'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C',
+                            style: TextStyle(fontSize: 20.0))),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.tint,
+                      color: Colors.indigo,
+                    ),
+                    Center(
+                        child: Text('Humidity: ${widget.weather.humidity}%',
+                            style: TextStyle(fontSize: 20.0))),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Icon(
+                        WeatherIcons.barometer,
                         color: Colors.indigo,
                       ),
-                      Center(
-                          child: Text('Humidity: ${widget.weather.humidity}%',
-                              style: TextStyle(fontSize: 20.0))),
-                    ],
-                  ),
+                    ),
+                    Center(
+                        child: Text(
+                      'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}${(widget.weather.pressure * 0.0075).toString()[2]}${(widget.weather.pressure * 0.0075).toString()[3]}mmHg',
+                      style: TextStyle(fontSize: 20.0),
+                    )),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Icon(
-                          WeatherIcons.barometer,
-                          color: Colors.indigo,
-                        ),
-                      ),
-                      Center(
-                          child: Text(
-                            'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}${(widget.weather.pressure * 0.0075).toString()[2]}${(widget.weather.pressure * 0.0075).toString()[3]}mmHg',
-                            style: TextStyle(fontSize: 20.0),
-                          )),
-                    ],
-                  ),
-                )
-              ]),
-            )
-          ]),
-            Container(color: Colors.blueAccent,),],
-        ));
+              )
+            ]),
+          )
+        ]),
+        Container(
+          color: Colors.blueAccent,
+        ),
+      ],
+    ));
   }
 
   void choiceAction(String choice) {
     switch (choice) {
-      case 'Информация':
+      case 'Information':
         showDialog(
             context: context,
             // ignore: missing_return
@@ -342,7 +351,7 @@ class _HomePageState extends State<HomePage> {
               return AlertDialog(
                 title: Text('Weathery v1.0.0'),
                 content: Container(
-                  height: 280.0,
+                  height: 300.0,
                   child: Column(
                     children: <Widget>[
                       Padding(
@@ -353,8 +362,8 @@ class _HomePageState extends State<HomePage> {
                           height: 150,
                         ),
                       ),
-                      Text('Developed by: Lavakalas(Ilya)\n'
-                          'Contact information: lavakalas@mail.ru')
+                      Text('Developed by: Lavakalas(Ilya)\n K4RT0F3L (Samir) \n'
+                          'Contact information: lavakalas@mail.ru, \n debilpolski15@gmail.com')
                     ],
                   ),
                 ),
@@ -362,7 +371,7 @@ class _HomePageState extends State<HomePage> {
             });
         break;
 
-      case 'Выход':
+      case 'Exit':
         SystemNavigator.pop();
         break;
     }

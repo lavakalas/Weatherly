@@ -19,15 +19,12 @@ class Weather {
       this.pressure,
       this.feels});
 
-  static Weather fromJson(String json) {
+  static List<Weather> fromJsonForecast(String json) {
     final Map<String, dynamic> data = jsonDecode(json);
 
-    print(data);
+//    print(data);
 
-    if (int.parse(data['code']) >= 200 &&
-        int.parse(data['code']) < 300) if (data.containsKey('list')) {
-      final currentWeather = data['list'][0];
-
+    if (int.parse(data['cod']) >= 200 && int.parse(data['cod']) < 300) {
       final List<Weather> currentForecast = [];
 
       for (int i = 0; i < data['list'].length; i++) {
@@ -48,8 +45,30 @@ class Weather {
           city: data['city']['name'],
         ));
       }
-    } else {}
-    else
+      return currentForecast;
+    } else
+      return null;
+  }
+
+  static Weather fromJson(String json) {
+    Map<String, dynamic> data = jsonDecode(json);
+
+    if (data['cod'] >= 200 && data['cod'] < 300) {
+      return Weather(
+        country: data['name'],
+        city: data['sys']['country'],
+        main: data['weather'][0]['main'],
+        description: data['weather'][0]['description'],
+        temperature: data['main']['temp'],
+        feels: data['main']['feels_like'],
+        minTemp: data['main']['temp_min'],
+        maxTemp: data['main']['temp_max'],
+        id: data['weather'][0]['id'],
+        pressure: data['main']['pressure'],
+        humidity: data['main']['humidity'],
+        windSpeed: data['wind']['speed'],
+      );
+    } else
       return null;
   }
 }

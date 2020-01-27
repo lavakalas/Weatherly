@@ -21,9 +21,9 @@ class _MyAppState extends State<MyApp> {
   void loading() async {
     Position position = await Geolocator().getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
-    num lon = position.longitude;
-    num lat = position.latitude;
-    await weatherRepository.getWeatherForCurrentTown('wow').then((value) {
+    await weatherRepository
+        .getWeatherForCurrentTown(position.latitude, position.longitude)
+        .then((value) {
       print(weatherRepository.loadedWeatherForCurrentTown);
       setState(() {
         isLoading = false;
